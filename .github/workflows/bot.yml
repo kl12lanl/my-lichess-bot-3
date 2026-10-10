@@ -1,16 +1,15 @@
 name: Lichess Bot
 
+
 on:
-  # Запуск при любом обновлении кода
+  workflow_dispatch: # <--- ЭТА СТРОКА ВКЛЮЧАЕТ КНОПКУ ПЛЕЙ
   push:
     branches: [ main, master ]
-  # Автоматический перезапуск каждые 30 минут, чтобы бот не спал
   schedule:
     - cron: '*/30 * * * *'
-  # Позволяет запускать бота вручную кнопкой Run workflow
-  workflow_dispatch:
 
 jobs:
+
   run-bot:
     runs-on: ubuntu-latest
 
