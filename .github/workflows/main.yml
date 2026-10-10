@@ -9,13 +9,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    
     - uses: actions/setup-python@v5
       with:
         python-version: '3.10'
+        
     - name: Run
       run: |
-        echo "=== СТАРТ БОТА ==="
+        echo "=== ИЩЕМ И ЗАПУСКАЕМ БОТА ==="
+        # Эта команда найдет lichess-bot.py, где бы он ни лежал, и запустит его
+        SCRIPT_PATH=$(find . -name "lichess-bot.py" | head -n 1)
+        
+        if [ -z "$SCRIPT_PATH" ]; then
+          echo "🔴 Ошибка: Файл lichess-bot.py вообще не найден в репозитории!"
+          exit 1
+        fi
+        
+        echo "✅ Файл найден по пути: $SCRIPT_PATH"
+        # Переходим в папку с файлом, чтобы он видел свои настройки
+        cd $(dirname "$SCRIPT_PATH")
+        
+        # Устанавливаем зависимости, если есть файл требований
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
+        # Запуск самого бота
         python lichess-bot.py
       env:
         LICHESS_BOT_TOKEN: ${{ secrets.LICHESS_BOT_TOKEN }}
-
