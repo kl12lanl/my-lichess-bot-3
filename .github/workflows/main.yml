@@ -1,0 +1,13 @@
+name: Test Lichess Bot
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run test
+      run: echo "GitHub ожил и видит этот файл!"
