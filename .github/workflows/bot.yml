@@ -31,5 +31,5 @@ jobs:
       run: python lichess-bot.py
       env:
         LICHESS_BOT_TOKEN: ${{ secrets.LICHESS_BOT_TOKEN }}
-
-     
+# запуск бота
+    
