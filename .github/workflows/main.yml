@@ -1,31 +1,21 @@
-name: Lichess Bot Final
+name: LichessBot
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch: # А вот теперь кнопка "плей" (Run workflow) ТОЧНО появится!
-  schedule:
-    - cron: '*/30 * * * *' # Будет автоматически пинать бота каждые 30 минут
+  workflow_dispatch:
 
 jobs:
-  run-bot:
+  start:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.10'
-
-    - name: Install dependencies
+    - name: Run
       run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-    - name: Run Bot Engine
-      run: python lichess-bot.py
+        echo "=== СТАРТ БОТА ==="
+        python lichess-bot.py
       env:
         LICHESS_BOT_TOKEN: ${{ secrets.LICHESS_BOT_TOKEN }}
+
