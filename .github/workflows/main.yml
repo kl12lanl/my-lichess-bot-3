@@ -13,4 +13,4 @@ jobs:
     - name: Показать список файлов
       run: |
         echo "=== СПИСОК ВСЕХ ФАЙЛОВ В ВАШЕМ БОТЕ ==="
-        find . -maxdepth 3 -not -path '*/.*'
+        find . -maxdepth 3 -not -path '*/.*' 
